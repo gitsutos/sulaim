@@ -1,1 +1,1 @@
-web: gunicorn DisneyPlusClone.wsgi
+web:gunicorn DisneyPlusClone.wsgi
