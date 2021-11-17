@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mysite',
+    'todoapp',
 ]
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
