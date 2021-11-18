@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
-from todoapp.models import Todo
+from todoapp.models import Costlist
 from django.http import HttpResponseRedirect
 
 
@@ -12,10 +12,10 @@ def empty(request):
 
 def index(request):
     complete_amount = 0
-    todo_items = Todo.objects.all().order_by("-added_date")
-    for todo_item in todo_items:
-        complete_amount += todo_item.amount
-    return render(request, 'todoapp/index.html', {"todo_items": todo_items,
+    cost_items = Costlist.objects.all().order_by("-added_date")
+    for cost_item in cost_items:
+        complete_amount += cost_item.amount
+    return render(request, 'todoapp/index.html', {"todo_items": cost_items,
                                                     "complete_amount":complete_amount})
 
 
@@ -26,7 +26,7 @@ def AddDo(request):
     amount = request.POST['amount']
     person_used = request.POST['person']
     print(now_date, '\n', content)
-    Todo.objects.create(added_date=now_date, 
+    Costlist.objects.create(added_date=now_date, 
 		text=content, 
 		amount=amount, 
 		person_used=person_used)
@@ -36,7 +36,7 @@ def AddDo(request):
 
 @csrf_exempt
 def delete_todo(request, todo_id):
-    Todo.objects.get(id=todo_id).delete()
+    Costlist.objects.get(id=todo_id).delete()
     return HttpResponseRedirect("/add_item/")
     
     
