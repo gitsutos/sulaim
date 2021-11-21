@@ -4,13 +4,15 @@
 {% load static %}
 
 <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
+<link rel="stylesheet" href="{% static 'CSS/min.css' %}">
 
-<body class="">
+<body>
   <div class="container">
     <div class="row mt-5">
       <div class="col">
         <div class="container">
           <form action="/add_todo/" class="form" method="post">
+            {% csrf_token %}
             <h2>Add item</h2>
             <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Type the task here.." name="content"
               required />
@@ -78,5 +80,10 @@
     " href="/Cost_of_month/">Show more</a>
   </div>
 </body>
+<script src="{% static 'JS/bootstrap.min.js' %}"></script>
+<script src="{% static 'JS/popper.min.js' %}"></script>
+<script src="{% static 'JS/jquery-3.3.1.slim.min.js' %}"></script>
+<script>
 
+</script>
 {% endblock content %}

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-1_8zd^)al716927=xwi!2ff!@+pss_tv*8#l3o*^rofar=4o%)
 DEBUG = True
 
 ALLOWED_HOSTS = ['sulaim1.herokuapp.com', '127.0.0.1']
-
+LOGIN_URL = '/login'
 
 # Application definition
 
@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'todoapp',
 ]
-SITE_ID = 1
-LOGIN_REDIRECT_URL = '/'
+
+LOGIN_REDIRECT_URL = '/loign'
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
