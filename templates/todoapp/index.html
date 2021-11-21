@@ -1,10 +1,8 @@
-{% extends "base.html" %}
-{% block title %}home{% endblock title %}
-{% block content %} 
-{% load static %}
+{% extends "base.html" %} {% block title %}home{% endblock title %} 
+{% block content %} {% load static %}
 
 <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
-<link rel="stylesheet" href="{% static 'CSS/min.css' %}">
+<link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
 
 <body>
   <div class="container">
@@ -14,14 +12,30 @@
           <form action="/add_todo/" class="form" method="post">
             {% csrf_token %}
             <h2>Add item</h2>
-            <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Type the task here.." name="content"
-              required />
-            <input type="text" class="form-control mb-2 mr-sm-2"
-              placeholder="type the amount that used to do the task.." required name="amount" />
+            <input
+              type="text"
+              class="form-control mb-2 mr-sm-2"
+              placeholder="Type the task here.."
+              name="content"
+              required
+            />
+            <input
+              type="text"
+              class="form-control mb-2 mr-sm-2"
+              placeholder="type the amount that used to do the task.."
+              required
+              name="amount"
+            />
             <br />
-            <label>Name of the person used
-              <input class="form-control mb-2 mr-sm-2" required name="person" placeholder="person name"
-                type="text" /></label>
+            <label
+              >Name of the person used
+              <input
+                class="form-control mb-2 mr-sm-2"
+                required
+                name="person"
+                placeholder="person name"
+                type="text"
+            /></label>
             <br />
             <button type="submit" class="btn btn-primary mb-2">Submit</button>
           </form>
@@ -33,29 +47,12 @@
         <table class="table table-hover table-dark">
           <thead>
             <tr>
-              <th scope="col">Date</th>
               <th scope="col">Amount</th>
               <th scope="col">User</th>
               <th scope="col">Task</th>
             </tr>
           </thead>
-          {% for todo_item in todo_items %}
-          <tbody>
-            <tr>
-              <td>{{todo_item.added_date}}</td>
-              <td>{{todo_item.amount}} LKR</td>
-              <td>{{todo_item.person_used}}</td>
-              <td>
-                {{todo_item.text}}
-                <form action="/delete_todo/{{todo_item.id}}" method="post">
-                  <div class="float-right">
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                  </div>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-          {% endfor %}
+          <tbody id="table-body-element"></tbody>
         </table>
         <h2>
           complete amount =
@@ -64,26 +61,71 @@
       </div>
     </div>
   </div>
-  <div class="bottom" style="
-    height: 100px;
-    background-color: black;
-    padding: 30px;
-    text-align: center;">
-    <a style="
-      border-left: 8px solid;
-      border-color: brown;
-      background-color: rgba(199, 75, 75, 0.74);
-      padding: 15px;
-      margin-top: 30px;
-      border-radius: 10px;
-      color: aliceblue;
-    " href="/Cost_of_month/">Show more</a>
+  <div
+    class="bottom"
+    style="
+      height: 100px;
+      background-color: black;
+      padding: 30px;
+      text-align: center;
+    "
+  >
+    <a
+      style="
+        border-left: 8px solid;
+        border-color: brown;
+        background-color: rgba(199, 75, 75, 0.74);
+        padding: 15px;
+        margin-top: 30px;
+        border-radius: 10px;
+        color: aliceblue;
+      "
+      href="/Cost_of_month/"
+      >Show more</a
+    >
   </div>
 </body>
-<script src="{% static 'JS/bootstrap.min.js' %}"></script>
-<script src="{% static 'JS/popper.min.js' %}"></script>
-<script src="{% static 'JS/jquery-3.3.1.slim.min.js' %}"></script>
 <script>
+  const tableDivElement = document.getElementById("table-body-elemen");
 
+  function loadCostTable(costTableEl) {
+    const xhr = new XMLHttpRequest
+    //xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
+    //xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
+    const method = "GET"
+    const url = "/list_view_of_costs"
+    const responseType = "json"
+    
+    xhr.responseType = responseType
+    xhr.open(method, url)
+    xhr.onload = function() {
+      const serverResponse = xhr.response
+      var listStrTemp = "";
+      var listedItems = serverResponse;
+      var i;
+
+      for (i = 0; i < listedItems.length; i++) {
+        var element = listedItems[i];
+        var currentItem = formatedCostElements(element)
+        listStrTemp += currentItem
+      }
+      costTableEl.innerHTML = listStrTemp
+    };
+    xhr.send()
+  }
+
+  loadCostTable(tableDivElement)
+
+  function formatedCostElements(costarg) {
+    var formatedcCE =
+      "<tr><td>" +
+      costarg.amount +
+      "</td><td>" +
+      costarg.person_used +
+      "</td><td>" +
+      costarg.description +
+      "</td></tr>";
+    return formatedcCE;
+  }
 </script>
 {% endblock content %}

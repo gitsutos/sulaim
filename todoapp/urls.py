@@ -4,8 +4,8 @@ from .views import *
 urlpatterns = [
   path('add_item/',index),
   path('add_todo/',add_cost),
-  path('', empty),
   path('delete_todo/<int:todo_id>', delete_todo),
-  path('Cost_of_month/',cost_of_year),
-  path('login',login),
+  path('Cost_of_month/', cost_of_year),
+  path('login', login),
+  path('list_view_of_costs', list_view_of_costs)
 ]

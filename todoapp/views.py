@@ -1,6 +1,6 @@
 from django.http.response import JsonResponse
 from django.shortcuts import redirect, render
-from django.utils import timezone
+
 from rest_framework.decorators import api_view
 from todoapp.models import Costlist
 from django.http import HttpResponseRedirect
@@ -26,11 +26,11 @@ def add_cost(request):
         if request.is_ajax():
             return JsonResponse({}, status=404)
         return redirect('/login')
-    now_date = timezone.now()
+   
     content = request.POST['content']
     amount = request.POST['amount']
     person_used = request.POST['person']
-    print(now_date, '\n', content)
+    print(content)
     Costlist.objects.create(
         user=request.user,
 		text=content, 
@@ -38,7 +38,14 @@ def add_cost(request):
 		person_used=person_used)
     return HttpResponseRedirect("/add_item/")
     
-    
+
+def list_view_of_costs(request):
+    qs = Costlist.objects.all()
+    costs_list = [x.serialize() for x in qs]   
+    data = {
+        "response":costs_list
+    }
+    return JsonResponse(data, status=200)
 
 def delete_todo(request, todo_id):
     Costlist.objects.get(id=todo_id).delete()

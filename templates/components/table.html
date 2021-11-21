@@ -1,0 +1,27 @@
+<table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Amount</th>
+        <th scope="col">User</th>
+        <th scope="col">Task</th>
+      </tr>
+    </thead>
+    {% for todo_item in todo_items %}
+    <tbody>
+      <tr>
+        <td>{{todo_item.added_date}}</td>
+        <td>{{todo_item.amount}} LKR</td>
+        <td>{{todo_item.person_used}}</td>
+        <td>
+          {{todo_item.text}}
+          <form action="/delete_todo/{{todo_item.id}}" method="post">
+            <div class="float-right">
+              <button type="submit" class="btn btn-danger">Delete</button>
+            </div>
+          </form>
+        </td>
+      </tr>
+    </tbody>
+    {% endfor %}
+  </table>
