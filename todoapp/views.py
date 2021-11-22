@@ -12,13 +12,12 @@ def empty(request):
 
 
 def index(request):
-    print(request.user)
+    #print(request.user)
     complete_amount = 0
-    cost_items = Costlist.objects.all().order_by("-added_date")
-    for cost_item in cost_items:
-        complete_amount += cost_item.amount
-    return render(request, 'todoapp/index.html', {"todo_items": cost_items,
-                                                    "complete_amount":complete_amount})
+    #cost_items = Costlist.objects.all().order_by("-added_date")
+    #for cost_item in cost_items:
+    #    complete_amount += cost_item.amount
+    return render(request, 'todoapp/index.html', {"complete_amount":complete_amount})
 
 @api_view(['POST'])
 def add_cost(request):
