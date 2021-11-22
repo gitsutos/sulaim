@@ -4,14 +4,14 @@
 <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
 <link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
 
-<body>
+<body id="main_body">
   <div class="container">
     <div class="row mt-5">
       <div class="col">
         <div class="container">
           <form action="/add_todo/" class="form" method="post">
             {% csrf_token %}
-            <h2>Add item</h2>
+            <h2 id="testing">Add item</h2>
             <input
               type="text"
               class="form-control mb-2 mr-sm-2"
@@ -52,7 +52,7 @@
               <th scope="col">Task</th>
             </tr>
           </thead>
-          <tbody id="table-body-element"></tbody>
+          <tbody id="table_body_element"></tbody>
         </table>
         <h2>
           complete amount =
@@ -61,32 +61,16 @@
       </div>
     </div>
   </div>
-  <div
-    class="bottom"
-    style="
-      height: 100px;
-      background-color: black;
-      padding: 30px;
-      text-align: center;
-    "
-  >
-    <a
-      style="
-        border-left: 8px solid;
-        border-color: brown;
-        background-color: rgba(199, 75, 75, 0.74);
-        padding: 15px;
-        margin-top: 30px;
-        border-radius: 10px;
-        color: aliceblue;
-      "
-      href="/Cost_of_month/"
-      >Show more</a
-    >
+  <div class="bottom">
+    <a href="/Cost_of_month/">
+      Show more</a>
   </div>
 </body>
+<script src="{% static 'JS/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'JS/bootstrap.min.js' %}"></script>
+
 <script>
-  const tableDivElement = document.getElementById("table-body-elemen");
+  const tableDivElement = $("#table_body_element")
 
   function loadCostTable(costTableEl) {
     const xhr = new XMLHttpRequest
@@ -101,20 +85,28 @@
     xhr.onload = function() {
       const serverResponse = xhr.response
       var listStrTemp = "";
-      var listedItems = serverResponse;
+      var listedItems = serverResponse.response;
       var i;
 
-      for (i = 0; i < listedItems.length; i++) {
-        var element = listedItems[i];
+      for (i = listedItems.length-1; i > -1; i--) {
+        var element = listedItems[i]
         var currentItem = formatedCostElements(element)
         listStrTemp += currentItem
       }
-      costTableEl.innerHTML = listStrTemp
+      costTableEl.replaceWith(listStrTemp)
     };
     xhr.send()
   }
 
   loadCostTable(tableDivElement)
+
+  function deleteButton() {
+    return "<form action='/delete_todo/{{todo_item.id}}' method='post'>"
+            +"<div class='float-right'>"
+              +"<button type='submit' class='btn btn-danger'>Delete</button>"
+            +"</div>"
+          +"</form>"
+  }
 
   function formatedCostElements(costarg) {
     var formatedcCE =
@@ -124,8 +116,14 @@
       costarg.person_used +
       "</td><td>" +
       costarg.description +
+      deleteButton()+
       "</td></tr>";
     return formatedcCE;
+  }
+  while ($(document).ready() === false) {
+    $("#main_body").replaceWith(
+      "<img style='height:30px; width:30px;' src='{% static 'img/TOS_size1_c_W.png' alt='TOS'>"
+    )
   }
 </script>
 {% endblock content %}
