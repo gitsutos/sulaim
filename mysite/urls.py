@@ -21,7 +21,7 @@ from django.conf.urls import include, url
 from todoapp.views import user_login,user_logout,use_sign_up
 
 urlpatterns = [
-    path('admin/', admin.site.urls),    
+    #path('admin/', admin.site.urls),    
     path('cost-manager-by-tos/',include('todoapp.urls')),
     path('favicon.ico', RedirectView.as_view('static/img/favicon.ico')),
     path('',RedirectView.as_view(url='cost-manager-by-tos/')),
