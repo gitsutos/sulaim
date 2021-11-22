@@ -90,6 +90,7 @@
 
       for (i = listedItems.length-1; i > -1; i--) {
         var element = listedItems[i]
+        console.log(element)
         var currentItem = formatedCostElements(element)
         listStrTemp += currentItem
       }
@@ -100,8 +101,8 @@
 
   loadCostTable(tableDivElement)
 
-  function deleteButton() {
-    return "<form action='/delete_todo/{{todo_item.id}}' method='post'>"
+  function deleteButton(obj) {
+    return "<form action='/delete_todo/"+obj.id+"' method='post'>"
             +"<div class='float-right'>"
               +"<button type='submit' class='btn btn-danger'>Delete</button>"
             +"</div>"
@@ -116,14 +117,9 @@
       costarg.person_used +
       "</td><td>" +
       costarg.description +
-      deleteButton()+
+      deleteButton(costarg)+
       "</td></tr>";
     return formatedcCE;
-  }
-  while ($(document).ready() === false) {
-    $("#main_body").replaceWith(
-      "<img style='height:30px; width:30px;' src='{% static 'img/TOS_size1_c_W.png' alt='TOS'>"
-    )
   }
 </script>
 {% endblock content %}

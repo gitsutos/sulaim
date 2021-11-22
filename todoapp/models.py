@@ -18,7 +18,8 @@ class Costlist(models.Model):
     return {
       "amount":self.amount,
       "description":self.text,
-      "person_used":self.person_used
+      "person_used":self.person_used,
+      "id":self.id
     }
 
   def __str__(self):

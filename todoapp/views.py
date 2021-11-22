@@ -1,16 +1,13 @@
 from django.http.response import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
 from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
 from todoapp.models import Costlist
 from django.http import HttpResponseRedirect
 
 
 # Create your views here.
-def empty(request):
-    return HttpResponseRedirect("add_item/")
-
-
 def index(request):
     #print(request.user)
     complete_amount = 0
@@ -39,13 +36,14 @@ def add_cost(request):
     
 
 def list_view_of_costs(request):
-    qs = Costlist.objects.all()
+    qs = Costlist.objects.filter(user=request.user)
     costs_list = [x.serialize() for x in qs]   
     data = {
         "response":costs_list
     }
     return JsonResponse(data, status=200)
 
+@csrf_exempt
 def delete_todo(request, todo_id):
     Costlist.objects.get(id=todo_id).delete()
     return HttpResponseRedirect("/add_item/")
