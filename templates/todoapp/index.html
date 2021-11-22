@@ -9,7 +9,7 @@
     <div class="row mt-5">
       <div class="col">
         <div class="container">
-          <form action="/add_todo/" class="form" method="post">
+          <form action="/cost-manager-by-tos/add_todo/" class="form" method="post">
             {% csrf_token %}
             <h2 id="testing">Add item</h2>
             <input
@@ -22,7 +22,7 @@
             <input
               type="text"
               class="form-control mb-2 mr-sm-2"
-              placeholder="type the amount that used to do the task.."
+              placeholder="amount"
               required
               name="amount"
             />
@@ -56,13 +56,13 @@
         </table>
         <h2>
           complete amount =
-          <span class="badge badge-warning"> {{complete_amount}} </span>
+          <span id="complete_cost" class="badge badge-warning"></span>
         </h2>
       </div>
     </div>
   </div>
   <div class="bottom">
-    <a href="/Cost_of_month/">
+    <a href="/cost-manager-by-tos/Cost_of_month/">
       Show more</a>
   </div>
 </body>
@@ -71,13 +71,14 @@
 
 <script>
   const tableDivElement = $("#table_body_element")
+  const completeCostElement = $("#complete_cost")
 
   function loadCostTable(costTableEl) {
     const xhr = new XMLHttpRequest
     //xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
     //xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
     const method = "GET"
-    const url = "/list_view_of_costs"
+    const url = "/cost-manager-by-tos/list_view_of_costs"
     const responseType = "json"
     
     xhr.responseType = responseType
@@ -87,22 +88,26 @@
       var listStrTemp = "";
       var listedItems = serverResponse.response;
       var i;
+      var TempAmount = 0;
 
       for (i = listedItems.length-1; i > -1; i--) {
         var element = listedItems[i]
-        console.log(element)
+        //console.log(element)
+        TempAmount += element.amount 
         var currentItem = formatedCostElements(element)
         listStrTemp += currentItem
       }
       costTableEl.replaceWith(listStrTemp)
+      completeCostElement.replaceWith(completeCostElement)
     };
     xhr.send()
+    completeCostElement.replaceWith(completeCostElement)
   }
 
   loadCostTable(tableDivElement)
 
   function deleteButton(obj) {
-    return "<form action='/delete_todo/"+obj.id+"' method='post'>"
+    return "<form action='/cost-manager-by-tos/delete_todo/"+obj.id+"' method='post'>"
             +"<div class='float-right'>"
               +"<button type='submit' class='btn btn-danger'>Delete</button>"
             +"</div>"

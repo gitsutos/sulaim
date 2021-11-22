@@ -17,13 +17,17 @@ from django.contrib import admin
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.views.generic.base import RedirectView
 from django.urls import path
-from django.conf.urls import include
-import todoapp
+from django.conf.urls import include, url
+from todoapp.views import user_login,user_logout,use_sign_up
 
 urlpatterns = [
     path('admin/', admin.site.urls),    
-    path('',include('todoapp.urls')),
+    path('cost-manager-by-tos/',include('todoapp.urls')),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
+    path('',RedirectView.as_view(url='cost-manager-by-tos/')),
+    path('login/', user_login),
+    path('log_out/', user_logout),
+    path('sign_up/', use_sign_up),
 
 ]
 

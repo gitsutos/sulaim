@@ -1,8 +1,9 @@
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
 
 # Create your models here.
-User = settings.AUTH_USER_MODEL
+User = User
 class Dates:
   date = models.DateField(auto_now_add=True)
   time = models.TimeField
