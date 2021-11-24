@@ -11,6 +11,7 @@
         <div class="container-md">
           <form action="/cost-manager-by-tos/add_todo/" class="form" method="post">
             {% csrf_token %}
+            <div class="row"></div>
             <h2 id="testing">Add item</h2>
             <input
               type="text"
@@ -20,14 +21,12 @@
               required
             />
             <h3>Amount</h3>
-            <input 
-              type="text"
-              class=" col-6 col-xs-12 form-control mb-2 mr-sm-2"
-              placeholder="amount"
-              required
-              name="amount"
-            />
-            <br />
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Rs</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="amount">
+            </div>
             <label
               >Name of the person used
               <input
@@ -37,7 +36,7 @@
                 placeholder="person name"
                 type="text"
             /></label>
-            <br />
+            <hr />
             <button type="submit" class="btn btn-primary mb-2">Submit</button>
           </form>
         </div>
