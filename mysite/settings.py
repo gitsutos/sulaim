@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-1_8zd^)al716927=xwi!2ff!@+pss_tv*8#l3o*^rofar=4o%)
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['sulaim1.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['sulaim1.herokuapp.com', '127.0.0.1','localhost']
 LOGIN_URL = '/login'
 
 # Application definition
