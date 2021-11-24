@@ -50,3 +50,7 @@
 .header__rightbutton{
     padding: 5px 20px;
 }
+.header__right > a {
+    font-style: normal;
+    color: aliceblue;
+}
