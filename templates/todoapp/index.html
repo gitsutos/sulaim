@@ -31,16 +31,18 @@
     <button type="submit" class="btn btn-primary mb-2">Submit</button>
   </form>
 </div>
-<div class="row">
-  <div class="tabel">
-    <h4 class="col-3">amount</h4>
-    <h4 class="col-5">person</h4>
-    <h4 class="col-4">task</h4>
-    <div id="table_body_element">
-        Loding ...
-    </div>
-  </div>
-</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Amount</th>
+      <th scope="col">Person-used</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody id="table_body_element">
+  </tbody>
+</table>
 <h2>
   complete amount =
   <span id="complete_cost" class="badge badge-warning"></span>

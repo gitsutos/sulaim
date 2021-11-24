@@ -48,14 +48,13 @@ return (
 }
 function formatedCostElements(costarg) {
 var formatedcCE =
-"<div class='row'>"+
-    "<li class='col-4'>" +
+    "<tr><td class='col-2'>" +
     costarg.amount +
-    "</li><li class='col-4'>" +
+    "</td><td class='col-4'>" +
     costarg.person_used +
-    "</li><li class='col-4'>" +
+    "</td><td class='col-6'>" +
     costarg.description +
     deleteButton(costarg) +
-    "</li></div>"
+    "</td></tr>"
 return formatedcCE;
 }
