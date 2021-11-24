@@ -7,14 +7,15 @@
   <meta charset="UTF-8">
   <title>{% block title %}{% endblock title %}- TOSbySulaim</title>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="{% static 'CSS/index.css' %}">
   <link rel="stylesheet" href="{% static 'CSS/min.css' %}">
 </head>
 
 <body style="min-height: 100%;">
   {% include 'components/navbar.html' %}
-  <div class="heigt">
   {% block content %}{% endblock content %}
-  </div>
 </body>
+<script src="{% static 'JS/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'JS/bootstrap.min.js' %}"></script>
+<script src="{% static 'JS/popper.min.js' %}"></script>
+
 </html>

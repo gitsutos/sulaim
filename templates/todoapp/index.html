@@ -1,130 +1,54 @@
-{% extends "base.html" %} {% block title %}home{% endblock title %} 
+{% extends "base.html" %} {% block title %}home{% endblock title %}
 {% block content %} {% load static %}
 
 <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
 <link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
 
-<body id="main_body" class="container-md">
-  <div class="container-fluid ">
-    <div class="row mt-5">
-      <div class="col ">
-        <div class="container-md">
-          <form action="/cost-manager-by-tos/add_todo/" class="form" method="post">
-            {% csrf_token %}
-            <div class="row"></div>
-            <h2 id="testing">Add item</h2>
-            <input
-              type="text"
-              class="form-control mb-2 mr-sm-2 col-6"
-              placeholder="Type the task here.."
-              name="content"
-              required
-            />
-            <h3>Amount</h3>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Rs</span>
-              </div>
-              <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" name="amount">
-            </div>
-            <label
-              >Name of the person used
-              <input
-                class="form-control mb-2 mr-sm-2"
-                required
-                name="person"
-                placeholder="person name"
-                type="text"
-            /></label>
-            <hr />
-            <button type="submit" class="btn btn-primary mb-2">Submit</button>
-          </form>
-        </div>
-      </div>
-    </div>
+<div class="container-md">
+  <form action="/cost-manager-by-tos/add_todo/" class="form" method="post">
+    {% csrf_token %}
     <div class="row">
-      <div class="col">
-        <div class="tabel">
-          <ul>
-            <h4 class="col-4">amount</h4>
-            <h4 class="col-4">person</h4>
-            <h4 class="col-4">task</h4>
-          </ul>
-          <ol id="table_body_element">
-            Loding
-          </ol>
+      <h2 class="col-6">Task</h2>
+      <h2 class="col-6">Amount</h2>
+      <div class="col-6 col-md-4 col-lg-4 col-xl-4">
+        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Type the task here.." name="content"
+          required />
+      </div>
+      <div class="col-6 col-md-4 col-lg-4 col-xl-4">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Rs</span>
+          </div>
+          <input placeholder="amount" type="text" class="form-control"
+            aria-label="Dollar amount (with dot and two decimal places)" name="amount" />
         </div>
-        <h2>
-          complete amount =
-          <span id="complete_cost" class="badge badge-warning"></span>
-        </h2>
+      </div>
+      <div class="col-6 col-md-4 col-lg-4 col-xl-4">
+        <input class="form-control mb-2 mr-sm-2" required name="person" placeholder="person name" type="text" />
       </div>
     </div>
+    <hr />
+    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+  </form>
+</div>
+<div class="row">
+  <div class="tabel">
+    <h4 class="col-4">amount</h4>
+    <h4 class="col-4">person</h4>
+    <h4 class="col-4">task</h4>
+    <div id="table_body_element">
+        Loding ...
+    </div>
   </div>
-  <div class="bottom">
-    <a href="/cost-manager-by-tos/Cost_of_month/">
-      Show more</a>
-  </div>
-</body>
+</div>
+<h2>
+  complete amount =
+  <span id="complete_cost" class="badge badge-warning"></span>
+</h2>
+<div class="bottom">
+  <a href="/cost-manager-by-tos/Cost_of_month/"> Show more</a>
+</div>
 <script src="{% static 'JS/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'JS/index.js' %}"></script>
 <script src="{% static 'JS/bootstrap.min.js' %}"></script>
-
-<script>
-  const tableDivElement = $("#table_body_element")
-  const completeCostElement = $("#complete_cost")
-
-  function loadCostTable(costTableEl) {
-    const xhr = new XMLHttpRequest
-    //xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
-    //xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest")
-    const method = "GET"
-    const url = "/cost-manager-by-tos/list_view_of_costs"
-    const responseType = "json"
-    
-    xhr.responseType = responseType
-    xhr.open(method, url)
-    xhr.onload = function() {
-      const serverResponse = xhr.response
-      var listStrTemp = "";
-      var listedItems = serverResponse.response;
-      var i;
-      var TempAmount = 0;
-
-      for (i = listedItems.length-1; i > -1; i--) {
-        var element = listedItems[i]
-        //console.log(element)
-        TempAmount += element.amount 
-        var currentItem = formatedCostElements(element)
-        listStrTemp += currentItem
-      }
-      costTableEl.replaceWith(listStrTemp)
-      completeCostElement.replaceWith(completeCostElement)
-    };
-    xhr.send()
-    completeCostElement.replaceWith(completeCostElement)
-  }
-
-  loadCostTable(tableDivElement)
-
-  function deleteButton(obj) {
-    return "<form action='/cost-manager-by-tos/delete_todo/"+obj.id+"' method='post'>"
-            +"<div class='float-right'>"
-              +"<button type='submit' class='btn btn-danger'>Delete</button>"
-            +"</div>"
-          +"</form>"
-  }
-
-  function formatedCostElements(costarg) {
-    var formatedcCE =
-      "<li>" +
-      costarg.amount +
-      "</li><li>" +
-      costarg.person_used +
-      "</li><li>" +
-      costarg.description +
-      deleteButton(costarg)+
-      "</li>";
-    return formatedcCE;
-  }
-</script>
 {% endblock content %}
