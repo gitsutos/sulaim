@@ -4,24 +4,25 @@
 <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
 <link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
 
-<body id="main_body">
-  <div class="container">
+<body id="main_body" class="container-md">
+  <div class="container-fluid ">
     <div class="row mt-5">
-      <div class="col">
-        <div class="container">
+      <div class="col ">
+        <div class="container-md">
           <form action="/cost-manager-by-tos/add_todo/" class="form" method="post">
             {% csrf_token %}
             <h2 id="testing">Add item</h2>
             <input
               type="text"
-              class="form-control mb-2 mr-sm-2"
+              class="form-control mb-2 mr-sm-2 col-6"
               placeholder="Type the task here.."
               name="content"
               required
             />
-            <input
+            <h3>Amount</h3>
+            <input 
               type="text"
-              class="form-control mb-2 mr-sm-2"
+              class=" col-6 col-xs-12 form-control mb-2 mr-sm-2"
               placeholder="amount"
               required
               name="amount"
@@ -44,16 +45,16 @@
     </div>
     <div class="row">
       <div class="col">
-        <table class="table table-hover table-dark">
-          <thead>
-            <tr>
-              <th scope="col">Amount</th>
-              <th scope="col">User</th>
-              <th scope="col">Task</th>
-            </tr>
-          </thead>
-          <tbody id="table_body_element"></tbody>
-        </table>
+        <div class="tabel">
+          <ul>
+            <h4 class="col-4">amount</h4>
+            <h4 class="col-4">person</h4>
+            <h4 class="col-4">task</h4>
+          </ul>
+          <ol id="table_body_element">
+            Loding
+          </ol>
+        </div>
         <h2>
           complete amount =
           <span id="complete_cost" class="badge badge-warning"></span>
@@ -116,14 +117,14 @@
 
   function formatedCostElements(costarg) {
     var formatedcCE =
-      "<tr><td>" +
+      "<li>" +
       costarg.amount +
-      "</td><td>" +
+      "</li><li>" +
       costarg.person_used +
-      "</td><td>" +
+      "</li><li>" +
       costarg.description +
       deleteButton(costarg)+
-      "</td></tr>";
+      "</li>";
     return formatedcCE;
   }
 </script>

@@ -6,3 +6,9 @@ div.bottom{
     background-color: black;
     text-align: center;
 }
+.heigt{
+    min-height: 100% !important;
+}
+a{
+    font-style: normal;
+}
