@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-1_8zd^)al716927=xwi!2ff!@+pss_tv*8#l3o*^rofar=4o%)
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['sulaim1.herokuapp.com', '127.0.0.1','localhost']
+ALLOWED_HOSTS = ['sulaim1.herokuapp.com', '127.0.0.1', 'localhost']
 LOGIN_URL = '/login'
 
 # Application definition
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/"templates"],
+        'DIRS': [BASE_DIR / 'frontend/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Adding Some More Static
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
+    BASE_DIR / 'frontend/build/static'
 ]
 #STATIC_ROOT = os.path.join(BASE_DIR, "static")
 # Default primary key field type
