@@ -2,6 +2,7 @@
 
 # dependencies
 frontend/node_modules
+frontend/node_modules/
 frontend/.pnp
 frontend/.pnp.js
 
@@ -21,5 +22,7 @@ frontend/.env.production.local
 frontend/npm-debug.log*
 frontend/yarn-debug.log*
 frontend/yarn-error.log*
-frontend/puplic
-frontend/src
+frontend/puplic/
+frontend/src/
+templates/
+static/

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     'todoapp',
+    'rest_framework',
+    "corsheaders",
 ]
 
 LOGIN_REDIRECT_URL = '/loign'

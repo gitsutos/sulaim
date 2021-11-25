@@ -13,16 +13,6 @@ from todoapp.models import Costlist
 from django.http import HttpResponseRedirect
 
 
-# Create your views here.
-def index(request):
-    # print(request.user)
-    complete_amount = 0
-    #cost_items = Costlist.objects.all().order_by("-added_date")
-    # for cost_item in cost_items:
-    #    complete_amount += cost_item.amount
-    return render(request, 'todoapp/index.html', {"complete_amount": complete_amount})
-
-
 @api_view(['POST'])
 def add_cost(request):
     if not request.user.is_authenticated:
@@ -37,7 +27,7 @@ def add_cost(request):
         text=content,
         amount=amount,
         person_used=person_used)
-    return HttpResponseRedirect("/cost-manager-by-tos/add_item/")
+    return HttpResponseRedirect("/tos/add_item/")
 
 
 def list_view_of_costs(request):
@@ -91,7 +81,7 @@ def use_sign_up(request):
     registered = False
     if request.user.is_authenticated():
         return redirect("/")
-        
+
     if request.method == 'POST':
         form = UserSignUpForm(data=request.POST)
 
