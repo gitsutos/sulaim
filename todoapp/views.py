@@ -32,9 +32,10 @@ def add_cost(request):
 
 def list_view_of_costs(request):
     qs = Costlist.objects.filter(user=request.user or None)
+    #qs = Costlist.objects.all()
     costs_list = [x.serialize() for x in qs]
     data = {
-        "response": costs_list
+        "cost_list": costs_list
     }
     return JsonResponse(data, status=200)
 
@@ -99,3 +100,7 @@ def use_sign_up(request):
         form = UserSignUpForm
 
     return render(request, 'signup.html', {"form": form})
+
+
+def index(request):
+    return render(request, "todoapp/index.html")

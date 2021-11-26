@@ -14,7 +14,7 @@ function loadCostTable(costTableEl) {
   xhr.onload = function () {
     const serverResponse = xhr.response;
     var listStrTemp = "";
-    var listedItems = serverResponse.response;
+    var listedItems = serverResponse.cost_list;
     var i;
     var TempAmount = 0;
 

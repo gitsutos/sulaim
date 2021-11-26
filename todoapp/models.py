@@ -26,7 +26,6 @@ class Costlist(models.Model):
             "description": self.text,
             "person_used": self.person_used,
             "id": self.id,
-            "date": self.added_date_time
         }
 
     def __str__(self):
