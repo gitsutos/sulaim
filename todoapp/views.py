@@ -27,7 +27,7 @@ def add_cost(request):
         text=content,
         amount=amount,
         person_used=person_used)
-    return HttpResponseRedirect("/tos/add_item/")
+    return HttpResponseRedirect("/cost-manager-by-tos/add_item/")
 
 
 def list_view_of_costs(request):
