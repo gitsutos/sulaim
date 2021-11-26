@@ -1,0 +1,20 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'CSS/components/navbar.css' %}" />
+<link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<nav id="header" v-cloak class="header">
+  <div class="header__left">
+    <h1><span>TO</span>S</h1>
+  </div>
+  <div class="header__right">
+    <a v-if="isLogged" href="/login/"><h4>Login</h4></a>
+    <a v-else href="/logout/"><h4>Logout</h4></a>
+    <a v-if="isLogged" href="/sign_up/"><h4>Sign_up</h4></a>
+    <a href="/cost-manager-by-tos/Cost_of_month/"><h4>Show more</h4></a>
+  </div>
+</nav>
+<script src="https://unpkg.com/vue@next"></script>
+<script src="{% static 'JS/components/navbar.js' %}"></script>
