@@ -10,9 +10,9 @@
     <h1><span>TO</span>S</h1>
   </div>
   <div class="header__right">
-    <a v-if="isLoged" href="/login/"><h4>Login</h4></a>
-    <a v-else="isLoged" href="/login/"><h4>Login</h4></a>
-    <a href="/sign_up/"><h4>Sign_up</h4></a>
+    <a v-if="isLogged" href="/login/"><h4>Login</h4></a>
+    <a v-else href="/logout/"><h4>Logout</h4></a>
+    <a v-if="isLogged" href="/sign_up/"><h4>Sign_up</h4></a>
     <a href="/cost-manager-by-tos/Cost_of_month/"><h4>Show more</h4></a>
   </div>
 </nav>
