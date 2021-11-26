@@ -1,7 +1,7 @@
 let Header = Vue.createApp({
-  delimiters: ["[[", "]]"],
-  data: {
-    isLogged: true,
-  },
+    delimiters: ["[[", "]]"],
+    data: () => {
+        return { isLogged: true,}
+    },
 });
 Header.mount("#header");
