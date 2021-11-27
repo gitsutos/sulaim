@@ -22,8 +22,9 @@ import todoapp
 
 urlpatterns = [
     path('admin/', admin.site.urls),    
-    path('',include('todoapp.urls')),
+    path('cost-manager-by-tos/',include('todoapp.urls')),
     path('favicon.ico', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
+    path('', RedirectView.as_view(url="cost-manager-by-tos/"))
 
 ]
 

@@ -9,12 +9,20 @@
   <div class="header__left">
     <h1><span>TO</span>S</h1>
   </div>
-  <div class="header__right">
-    <a v-if="isLogged" href="/login/"><h4>Login</h4></a>
-    <a v-else href="/logout/"><h4>Logout</h4></a>
-    <a v-if="isLogged" href="/sign_up/"><h4>Sign_up</h4></a>
+  <div v-if="isLogged" class="header__right">
+    <a href="/login/"><h4>Login</h4></a>
+  <!--  <a v-else href="/logout/"><h4>Logout</h4></a>-->
+    <a href="/sign_up/"><h4>Sign_up</h4></a>
     <a href="/cost-manager-by-tos/Cost_of_month/"><h4>Show more</h4></a>
   </div>
+  <div v-else class="header__right">
+    <a href="/logout/"><h4>Logout</h4></a>
+    <a href="/cost-manager-by-tos/Cost_of_month/"><h4>Show more</h4></a>
+    <div class="user_info">
+      <h5>About</h5>
+    </div>
+  </div>
+
 </nav>
 <script src="https://unpkg.com/vue@next"></script>
 <script src="{% static 'JS/components/navbar.js' %}"></script>
