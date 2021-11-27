@@ -98,9 +98,10 @@ def sign_up_view(request):
             user = form.save(commit=False)
             user.set_password(user.password)
             user.save()
-            return redirect('/login/')
+            return HttpResponseRedirect('/login/')
         else:
             print(form.errors)
+            print("error")
             JsonResponse({"error": 'password not match'}, status=404)
     else:
         form = UserForm()

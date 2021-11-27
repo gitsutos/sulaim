@@ -8,9 +8,10 @@
   </head>
   <body>
     <div class="jumbotron login" style="margin-left: 20%">
-      <form action="/login/" method="post">
+      <form action="/sign_up/" method="POST">
+        {% csrf_token %}
         {{form.as_p}}
-        <input class="btn btn-warning" type="submit" value="submit" />
+        <input type="submit" value="submit" />
       </form>
     </div>
   </body>
