@@ -9,7 +9,3 @@ class UserForm(forms.ModelForm):
     class Meta():
         model = User
         fields = ['username','password','email']
-
-    def password_validator(self):
-        if not self.password == self.re_Type_Password:
-            return ValidationError

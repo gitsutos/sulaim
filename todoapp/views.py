@@ -94,13 +94,10 @@ def sign_up_view(request):
     registered = False
     if request.method == 'POST':
         form = UserForm(data=request.POST)
-        registered = True
-
         if form.is_valid():
             user = form.save(commit=False)
             user.set_password(user.password)
             user.save()
-            registered = True
             return redirect('/login/')
         else:
             print(form.errors)

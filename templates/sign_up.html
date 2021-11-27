@@ -8,7 +8,10 @@
   </head>
   <body>
     <div class="jumbotron login" style="margin-left: 20%">
-      <form action="/login/">{{form.as_p}}</form>
+      <form action="/login/" method="post">
+        {{form.as_p}}
+        <input class="btn btn-warning" type="submit" value="submit" />
+      </form>
     </div>
   </body>
 </html>
