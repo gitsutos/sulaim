@@ -27,6 +27,6 @@ urlpatterns = [
     path('', RedirectView.as_view(url="cost-manager-by-tos/")),
     path('login/',todoapp.views.login_view ,name="login"),   
     path('logout/',todoapp.views.logout_view ,name="logout"),   
-    path('sign_up/',todoapp.views.login_view,name='register')
+    path('sign_up/',todoapp.views.sign_up_view,name='register')
 ]
 
