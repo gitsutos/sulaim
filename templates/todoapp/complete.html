@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'CSS/main/complete.css' %}" />
+<table id="complete_cost_table">
+    <thead>
+        <tr>
+            <th>Date added</th>
+            <th>Amount</th>
+            <th>Person used</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th v-for="ListedItem in ListedItems">[{ListedItem.date}]</th>
+        </tr>
+    </tbody>
+</table>
+<script src="{% static 'JS/main/complete.js' %}"></script>
+{% endblock content %}

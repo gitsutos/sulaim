@@ -1,0 +1,14 @@
+body.main{
+    background-color: rgb(255, 255, 255);
+}
+div.bottom{
+    height: 100px;
+    background-color: black;
+    text-align: center;
+}
+.table-backround{
+    background-color: white;
+}
+.login {
+    margin-left: 20%;
+}

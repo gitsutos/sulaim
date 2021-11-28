@@ -16,6 +16,7 @@ class Costlist(models.Model):
 
   def serialize(self):
     return {
+      "date":self.added_date,
       "amount":self.amount,
       "description":self.text,
       "person_used":self.person_used,

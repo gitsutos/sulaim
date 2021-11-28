@@ -57,7 +57,7 @@ def delete_todo(request, todo_id):
 
 
 def cost_of_year(request):
-    return render(request, 'todoapp/completeSelavu.html')
+    return render(request, 'todoapp/complete.html')
 
 
 def login_view(request, *args, **keywargs):
@@ -78,7 +78,7 @@ def login_view(request, *args, **keywargs):
                 HttpResponse('USER IS NOT ACTIVE')
         else:
             JsonResponse({}, status=401)
-            return render(request, 'login.html')
+            return render(request, 'login.html',{"error_msg":"User name and password does not match"})
 
     return render(request, 'login.html')
 
