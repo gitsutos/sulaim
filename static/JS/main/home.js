@@ -45,17 +45,10 @@ function formatedCostElements(costarg) {
     "<tr><td>" +
     costarg.amount +
     "</td><td>" +
+    costarg.person_used +
+    "</td><td>" +
     costarg.description +
     deleteButton(costarg) +
     "</td></tr>";
   return formatedcCE;
 }
-
-//div
-
-const app = Vue.createApp({
-  delimiters: ["[[", "]]"],
-  data: () => {
-    return {};
-  },
-});

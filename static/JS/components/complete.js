@@ -1,5 +1,6 @@
-const tableDivElement = $("#table_body_element");
+const tableDivElement = document.getElementById("table_body_element");
 
+console.log("hi")
 function loadCostTable(costTableEl) {
   const xhr = new XMLHttpRequest();
   //xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
@@ -14,20 +15,22 @@ function loadCostTable(costTableEl) {
     const serverResponse = xhr.response;
     var listStrTemp = "";
     var listedItems = serverResponse.costs_list;
-    var i;
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
-    for (i = listedItems.length - 1; i > -1; i--) {
+    for (var i = listedItems.length - 1; i > -1; i--) {
       var element = listedItems[i];
-      var currentItem = formatedCostElements(element);
+      let now = new Date(element.date);
+      // console.log(element.date)
+      // console.log(now.toLocaleDateString("en-US"));
+      var currentItem = formatedCostElements(element, now.toLocaleDateString("ta-IN", options));
       listStrTemp += currentItem;
     }
-    costTableEl.replaceWith(listStrTemp);
+    tableDivElement.innerHTML = listStrTemp
   };
   xhr.send();
 }
 
 loadCostTable(tableDivElement);
-
 function deleteButton(obj) {
   return (
     "<form action='/delete_todo/" +
@@ -40,22 +43,20 @@ function deleteButton(obj) {
   );
 }
 
-function formatedCostElements(costarg) {
+function formatedCostElements(costarg, datearg) {
   var formatedcCE =
     "<tr><td>" +
+    datearg +
+    "</td><td>" +
     costarg.amount +
+    "</td><td>" +
+    costarg.person_used +
     "</td><td>" +
     costarg.description +
     deleteButton(costarg) +
     "</td></tr>";
   return formatedcCE;
 }
-
-//div
-
-const app = Vue.createApp({
-  delimiters: ["[[", "]]"],
-  data: () => {
-    return {};
-  },
-});
+if (!$(document).ready()) {
+  $("#body").replaceWith("Loding...")
+}

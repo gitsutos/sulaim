@@ -1,18 +1,22 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock title %}- TOSbySulaim</title>
-    <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
-    <link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
-  </head>
 
-  <body style="background-color: rgb(235, 235, 235)">
-    {%include 'components/navbar.html'%} {% block content %}
-    {% endblock content %}
-    <script src="https://unpkg.com/vue@next"></script>
-  </body>
+<head>
+  {% block head %}
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{% endblock title %}- TOSbySulaim</title>
+  <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
+  <link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
+  {% endblock %}
+</head>
+
+<div style="background-color: rgb(235, 235, 235)">
+  {% include 'components/navbar.html' %} {% block content %}
+  {% endblock content %}
+</div>
+<script src="https://unpkg.com/vue@next"></script>
+
 </html>

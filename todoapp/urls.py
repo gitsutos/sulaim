@@ -4,6 +4,7 @@ from django.views.generic.base import RedirectView
 
 urlpatterns = [
   path('add_item/',index),
+  path('home/', RedirectView.as_view(url='/cost-manager-by-tos/add_item/')),
   path('add_todo/',add_cost),
   path('delete_todo/<int:todo_id>', delete_todo),
   path('Cost_of_month/', cost_of_year),

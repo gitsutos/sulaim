@@ -15,7 +15,7 @@ def index(request):
     #cost_items = Costlist.objects.all().order_by("-added_date")
     # for cost_item in cost_items:
     #    complete_amount += cost_item.amount
-    return render(request, 'todoapp/index.html', {"complete_amount": complete_amount})
+    return render(request, 'pages/index.html', {"complete_amount": complete_amount})
 
 
 @api_view(['POST'])
@@ -41,13 +41,14 @@ def list_view_of_costs(request):
     try:
         qs = Costlist.objects.filter(user=request.user or None)
         costs_list = [x.serialize() for x in qs]
+        # print(costs_list)
         data = {
             "costs_list": costs_list
         }
         return JsonResponse(data, status=200)
     except:
         print("error")
-        return JsonResponse(data={}, status=404)
+        return JsonResponse(data={}, status=400)
 
 
 @csrf_exempt
@@ -57,7 +58,7 @@ def delete_todo(request, todo_id):
 
 
 def cost_of_year(request):
-    return render(request, 'todoapp/complete.html')
+    return render(request, 'pages/complete.html')
 
 
 def login_view(request, *args, **keywargs):
@@ -78,7 +79,7 @@ def login_view(request, *args, **keywargs):
                 HttpResponse('USER IS NOT ACTIVE')
         else:
             JsonResponse({}, status=401)
-            return render(request, 'login.html',{"error_msg":"User name and password does not match"})
+            return render(request, 'login.html', {"error_msg": "User name and password does not match"})
 
     return render(request, 'login.html')
 
@@ -108,6 +109,7 @@ def sign_up_view(request):
         registered = False
 
     return render(request, "sign_up.html", context={"form": form})
+
 
 def logout_view(request):
     logout(request)

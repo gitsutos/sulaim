@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %}home{% endblock title %} 
+{% extends "base.html" %} {% block title %}home{% endblock title %}
 {% block content %} {% load static %}
 
 <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
@@ -12,39 +12,29 @@
           <form action="/cost-manager-by-tos/add_todo/" class="form" method="post">
             {% csrf_token %}
             <h2 id="testing">Add item</h2>
-            <input
-              type="text"
-              class="form-control mb-2 mr-sm-2"
-              placeholder="Type the task here.."
-              name="content"
-              required
-            />
+            <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Type the task here.." name="content"
+              required />
             <div class="input-group-prepend">
               <div class="input-group-text">Rs</div>
               <input name="amount" type="text" class="form-control" id="inlineFormInputGroup" placeholder="Amount">
             </div>
-          </div>
-            <br />
-            <label
-              >Name of the person used
-              <input
-                class="form-control mb-2 mr-sm-2"
-                required
-                name="person"
-                placeholder="person name"
-                type="text"
-            /></label>
-            <br />
-            <button type="submit" class="btn btn-primary mb-2">Submit</button>
-          </form>
         </div>
+        <br />
+        <label>Name of the person used
+          <input class="form-control mb-2 mr-sm-2" required name="person" placeholder="person name"
+            type="text" /></label>
+        <br />
+        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col">
+
+    <div class="container row">
+      <div class="col ">
         <table class="table table-hover table-light">
           <thead>
             <tr>
+              <th scope="col">Amount</th>
               <th scope="col">Task</th>
             </tr>
           </thead>
@@ -53,10 +43,11 @@
       </div>
     </div>
   </div>
-  <div class="bottom">
+  </div>
+  <!--<div class="bottom">
     <a href="/Cost_of_month/">
       Show more</a>
-  </div>
+  </div>-->
 </body>
 <script src="{% static 'JS/jquery-3.3.1.slim.min.js' %}"></script>
 <script src="https://unpkg.com/vue@next"></script>

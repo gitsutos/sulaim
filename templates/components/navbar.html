@@ -1,18 +1,14 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'CSS/components/navbar.css' %}" />
 <link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
-<nav id="header" v-cloak class="header">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<!--<nav id="header" v-cloak class="header">
   <div class="header__left">
     <h1><span>TO</span>S</h1>
   </div>
   <div v-if="isLogged" class="header__right">
     <a href="/login/"><h4>Login</h4></a>
     <a href="/sign_up/"><h4>Sign_up</h4></a>
-    <a href="/cost-manager-by-tos/Cost_of_month/"><h4>Show more</h4></a>
   </div>
   <div v-else class="header__right">
     <a href="/logout/"><h4>Logout</h4></a>
@@ -21,7 +17,24 @@
       <h5>About</h5>
     </div>
   </div>
+</nav>-->
+<div v-cloak id="header">
+  <div class="topnav" id="myTopnav">
+    <a href="/cost-manager-by-tos/home/"><img src="{% static 'img/logo.png' %}" alt=""></a>
+    <a v-if="isLogged" href="/login/">Login</a>
+    <a v-if="isLogged" href="/sign_up/">Sign_up</a>
+    <a v-if="!isLogged" href="/logout/">Logout</a>
+    <a v-if="!isLogged" href="/cost-manager-by-tos/Cost_of_month/">Show more</a>
+    <a href="/cost-manager-by-tos/Cost_of_month/">Home</a>
+    <a>
+      About
+    </a>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
 
-</nav>
+
+</div>
 <script src="https://unpkg.com/vue@next"></script>
 <script src="{% static 'JS/components/navbar.js' %}"></script>
