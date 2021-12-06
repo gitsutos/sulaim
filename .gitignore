@@ -2,3 +2,4 @@ __pycache__/
 admin/
 db.sqlite3
 static/
+rest_framework/
