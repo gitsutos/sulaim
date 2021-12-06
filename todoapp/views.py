@@ -5,11 +5,15 @@ from django.contrib.auth import authenticate, login, logout
 from .forms import UserForm
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
-from todoapp.models import Costlist
+from todoapp.models import Costlist, User
+from rest_framework.response import Response
 from django.http import HttpResponseRedirect
 
+from .serialize import CostlistSerializer
 
 # Create your views here.
+
+
 def index(request):
     complete_amount = 0
     #cost_items = Costlist.objects.all().order_by("-added_date")
@@ -37,18 +41,14 @@ def add_cost(request):
     return HttpResponseRedirect("/cost-manager-by-tos/add_item/")
 
 
-def list_view_of_costs(request):
+@api_view(['GET'])
+def list_view_of_costs(request, *args, **kwargs):
     try:
         qs = Costlist.objects.filter(user=request.user or None)
-        costs_list = [x.serialize() for x in qs]
-        # print(costs_list)
-        data = {
-            "costs_list": costs_list
-        }
-        return JsonResponse(data, status=200)
+        serializer = CostlistSerializer(qs, many=True)
+        return Response(serializer.data)
     except:
-        print("error")
-        return JsonResponse(data={}, status=400)
+        return JsonResponse(data={}, status=401)
 
 
 @csrf_exempt
@@ -63,7 +63,7 @@ def cost_of_year(request):
 
 def login_view(request, *args, **keywargs):
     if request.user.is_authenticated:
-        return redirect('/cost-manager-by-tos/add_item/')
+        return redirect('/cost-manager-by-tos/')
 
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -74,7 +74,7 @@ def login_view(request, *args, **keywargs):
         if user:
             if user.is_active:
                 login(request, user)
-                return redirect('/cost-manager-by-tos/add_item/')
+                return redirect('/cost-manager-by-tos/')
             else:
                 HttpResponse('USER IS NOT ACTIVE')
         else:
@@ -113,4 +113,8 @@ def sign_up_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/cost-manager-by-tos/add_item/')
+    return redirect('/cost-manager-by-tos/')
+
+
+def home_view(request):
+    return render(request, 'pages/home.html')

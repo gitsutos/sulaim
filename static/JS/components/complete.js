@@ -1,6 +1,6 @@
-const tableDivElement = document.getElementById("table_body_element");
+const tableDivElement = $("#table_body_element");
 
-console.log("hi")
+//console.log("hi")
 function loadCostTable(costTableEl) {
   const xhr = new XMLHttpRequest();
   //xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
@@ -12,24 +12,30 @@ function loadCostTable(costTableEl) {
   xhr.responseType = responseType;
   xhr.open(method, url);
   xhr.onload = function () {
-    const serverResponse = xhr.response;
-    var listStrTemp = "";
-    var listedItems = serverResponse.costs_list;
-    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-
-    for (var i = listedItems.length - 1; i > -1; i--) {
-      var element = listedItems[i];
-      let now = new Date(element.date);
-      // console.log(element.date)
-      // console.log(now.toLocaleDateString("en-US"));
-      var currentItem = formatedCostElements(element, now.toLocaleDateString("ta-IN", options));
-      listStrTemp += currentItem;
+    if (xhr.status === 200) {
+      const serverResponse = xhr.response;
+      var listStrTemp = "";
+      var listedItems = serverResponse;
+      var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      for (var i = listedItems.length - 1; i > -1; i--) {
+        var element = listedItems[i];
+        let now = new Date(element.added_date);
+        // console.log(element.date)
+        // console.log(now.toLocaleDateString("en-US"));
+        var currentItem = formatedCostElements(element, now.toLocaleDateString("en-US", options));
+        listStrTemp += currentItem;
+      }
+      tableDivElement.replaceWith(listStrTemp)
     }
-    tableDivElement.innerHTML = listStrTemp
   };
   xhr.send();
 }
-
+$.get("/cost-manager-by-tos/is_auth_or_no/",
+  function (data, textStatus, jqXHR) {
+    log(data + "  " + textStatus + ' ' + jqXHR)
+  },
+  "json"
+);
 loadCostTable(tableDivElement);
 function deleteButton(obj) {
   return (
@@ -52,11 +58,14 @@ function formatedCostElements(costarg, datearg) {
     "</td><td>" +
     costarg.person_used +
     "</td><td>" +
-    costarg.description +
+    costarg.text +
     deleteButton(costarg) +
     "</td></tr>";
   return formatedcCE;
 }
-if (!$(document).ready()) {
-  $("#body").replaceWith("Loding...")
+if ($(document).ready() === false) {
+  log("peep")
+}
+function log(arg) {
+  console.log(arg)
 }

@@ -1,6 +1,6 @@
-{% extends "base.html" %} {% block title %}home{% endblock title %}
-{% block content %} {% load static %}
-
+{% extends "base.html" %} {% block title %}add_costs{% endblock title %}
+{% load static %}
+{% block content %}
 <link rel="stylesheet" href="{% static 'CSS/index.css' %}" />
 <link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
 
@@ -49,9 +49,9 @@
       Show more</a>
   </div>-->
 </body>
+{% endblock content %}
+{% block script %}
 <script src="{% static 'JS/jquery-3.3.1.slim.min.js' %}"></script>
 <script src="https://unpkg.com/vue@next"></script>
 <script src="{% static 'JS/index.js'%}"></script>
-
-
-{% endblock content %}
+{% endblock script %}

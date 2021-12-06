@@ -1,6 +1,5 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'CSS/components/navbar.css' %}" />
-<link rel="stylesheet" href="{% static 'CSS/min.css' %}" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 <!--<nav id="header" v-cloak class="header">
   <div class="header__left">
@@ -18,23 +17,24 @@
     </div>
   </div>
 </nav>-->
-<div v-cloak id="header">
-  <div class="topnav" id="myTopnav">
-    <a href="/cost-manager-by-tos/home/"><img src="{% static 'img/logo.png' %}" alt=""></a>
-    <a v-if="isLogged" href="/login/">Login</a>
-    <a v-if="isLogged" href="/sign_up/">Sign_up</a>
-    <a v-if="!isLogged" href="/logout/">Logout</a>
-    <a v-if="!isLogged" href="/cost-manager-by-tos/Cost_of_month/">Show more</a>
-    <a href="/cost-manager-by-tos/Cost_of_month/">Home</a>
-    <a>
-      About
-    </a>
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-      <i class="fa fa-bars"></i>
-    </a>
+
+<body>
+  <div id="header">
+    <div class="topnav" id="myTopnav">
+      <a href="/cost-manager-by-tos/home/"><img src="{% static 'img/logo.png' %}" alt=""></a>
+      <a v-if="isLogged" href="/login/">Login</a>
+      <a v-if="isLogged" href="/sign_up/">Sign_up</a>
+      <a v-if="!isLogged" href="/logout/">Logout</a>
+      <a v-if="!isLogged" href="/cost-manager-by-tos/Cost_of_month/">Costs</a>
+      <a v-if="!isLogged" href="/cost-manager-by-tos/add_item/">Add Cost</a>
+      <a>
+        About
+      </a>
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
   </div>
-
-
-</div>
+</body>
 <script src="https://unpkg.com/vue@next"></script>
 <script src="{% static 'JS/components/navbar.js' %}"></script>

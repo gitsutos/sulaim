@@ -1,6 +1,6 @@
 const tableDivElement = document.getElementById("table_body_element");
 
-console.log("hi")
+//console.log("hi")
 function loadCostTable(costTableEl) {
   const xhr = new XMLHttpRequest();
   //xhr.setRequestHeader("HTTP_X_REQUESTED_WITH", "XMLHttpRequest")
@@ -14,7 +14,7 @@ function loadCostTable(costTableEl) {
   xhr.onload = function () {
     const serverResponse = xhr.response;
     var listStrTemp = "";
-    var listedItems = serverResponse.costs_list;
+    var listedItems = serverResponse;
     var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
     for (var i = listedItems.length - 1; i > -1; i--) {

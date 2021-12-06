@@ -11,18 +11,27 @@ function loadCostTable(costTableEl) {
   xhr.responseType = responseType;
   xhr.open(method, url);
   xhr.onload = function () {
-    const serverResponse = xhr.response;
-    var listStrTemp = "";
-    var listedItems = serverResponse.costs_list;
-    var i;
+    if (xhr.status === 200) {
+      const serverResponse = xhr.response;
+      var listStrTemp = "";
+      var listedItems = serverResponse;
 
-    for (i = listedItems.length - 1; i > -1; i--) {
-      var element = listedItems[i];
-      var currentItem = formatedCostElements(element);
-      listStrTemp += currentItem;
+      for (var i = listedItems.length - 1; i > -1; i--) {
+        var element = listedItems[i];
+        var currentItem = formatedCostElements(element);
+        listStrTemp += currentItem;
+      }
+      costTableEl.replaceWith(listStrTemp);
+    };
+    if (xhr.status === 401) {
+      $("#main_body").replaceWith(`<div class="jumbotron">
+        <h1>Login requird</h1>
+        <h3><p>you must login to add, delete and see your costs </p></h3>
+        <p>if you already have an tos acount then <a href="/login/">login</a> in <br>
+        if you don't have click the "<a href="/sign_up">Sign_up</a>" link and create an account and then login</p>
+      </div>`)
     }
-    costTableEl.replaceWith(listStrTemp);
-  };
+  }
   xhr.send();
 }
 
@@ -45,7 +54,7 @@ function formatedCostElements(costarg) {
     "<tr><td>" +
     costarg.amount +
     "</td><td>" +
-    costarg.description +
+    costarg.text +
     deleteButton(costarg) +
     "</td></tr>";
   return formatedcCE;
